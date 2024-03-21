@@ -2,7 +2,7 @@
 -e .
 
 # external requirements
-click
+click~=8.1.7
 Sphinx
 coverage
 awscli
@@ -12,3 +12,16 @@ python-dotenv>=0.5.1
 
 # backwards compatibility
 pathlib2
+
+setuptools~=68.2.0
+
+# need
+matplotlib
+notebook
+numpy
+scikit-learn
+scipy
+pandas
+virtualenv
+tqdm
+seaborn

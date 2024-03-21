@@ -1,6 +1,12 @@
-nlp-toxic-detection
+ml-classification-experimentation
 ==============================
+# Description
 
+# Team 
+- Hasan Kajila (tshh1301@usherbrooke.ca)
+- Imad Eddine Behlouli (behi3301@usherbrooke.ca)
+- Mallory Vadim Couthon (coum2050@usherbrooke.ca)
+- Ismail Andaloussi (coum2050@usherbrooke.ca)
 ...
 
 Project Organization

@@ -1,9 +1,9 @@
-.. nlp-toxic-detection documentation master file, created by
+.. ml-classification-experimentation documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-nlp-toxic-detection documentation!
+ml-classification-experimentation documentation!
 ==============================================
 
 Contents:
