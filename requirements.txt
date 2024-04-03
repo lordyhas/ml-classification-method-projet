@@ -18,10 +18,11 @@ setuptools~=68.2.0
 # need
 matplotlib
 notebook
-numpy
-scikit-learn
+numpy~=1.26.4
+scikit-learn~=1.4.1.post1
 scipy
-pandas
+pandas~=2.2.1
 virtualenv
 tqdm
 seaborn
+statsmodels
