@@ -2,7 +2,6 @@ from sklearn.model_selection import GridSearchCV
 
 
 class CrossValidate(object):
-
     def __init__(self, params: dict, model, k_fold: int, metric="accuracy"):
         self.params = params
         self.metric = metric
@@ -12,8 +11,6 @@ class CrossValidate(object):
 
         self.is_trained = False
 
-    def set_metric(self, metric):
-        self.metric = metric
     def train(self, x_train, y_train):
         # Effectuer la recherche des hyperparamètres
         self.grid_search.fit(x_train, y_train)
