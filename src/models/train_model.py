@@ -5,7 +5,11 @@ class TrainModel(object):
         self.model = model
         self.is_trained = False
 
-    def train(self, x_train, y_train):
+    def training(self, x_train, y_train):
+        self.model.fit(x_train, y_train)
+        self.is_trained = True
+        return self.model
+    def history(self):
         pass
     def predict(self):
         pass
