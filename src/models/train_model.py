@@ -1,6 +1,24 @@
 from sklearn.model_selection import GridSearchCV
 
+class TrainModel(object):
+    def __init__(self, model):
+        self.model = model
+        self.is_trained = False
 
+    def train(self, x_train, y_train):
+        pass
+    def predict(self):
+        pass
+    def error(self, x, target):
+        pass
+    def train_error(self):
+        pass
+    def train_accuracy(self):
+        pass
+    def get_trained_model(self):
+        return self.model \
+            if self.is_trained \
+            else None
 class CrossValidate(object):
     def __init__(self, params: dict, model, k_fold: int, metric="accuracy"):
         self.params = params
