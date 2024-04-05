@@ -17,41 +17,49 @@ class LeafDataPreprocessing(object):
         self.__data = data
         #self._test = test
         self._processed_data = self.__data.copy()
-        self._processed_test_data = self.__data.copy()
+        #self._processed_test_data = self.__data.copy()
         self.__set_normalized_and_encode(normalized=normalized)
 
     def is_normalized(self):
         return self.__is_normalized
     def __set_normalized_and_encode(self, normalized):
-        # Initialize the scaler
+        """
+        Cette methode normalise les données et encode les cibles
+        """
+
         scaler = MinMaxScaler()
 
+
         if normalized:
-            # Initialize the encoder
             le = LabelEncoder()
-            # Encode the 'species' column
+            # Encoder la colonne 'species'
             self._processed_data['species'] = le.fit_transform(self._processed_data['species'])
             self.__is_normalized = True
 
-        # Scale numeric columns. Exclude 'id' and 'species' from being scaled
+        # # Mettre à l'échelle les colonnes numériques. Exclure «id» et «espèces»
+        # de la mise à l'échelle
         numeric_cols = self._processed_data.columns.drop(['id', 'species'])
         self._processed_data[numeric_cols] = scaler.fit_transform(self._processed_data[numeric_cols])
+        self.get_classes()
 
-    def get_encode_target(self):
+    def get_classes(self) -> pd.DataFrame:
+        return self._processed_data['species'].unique()
+    def get_encode_target(self) -> pd.DataFrame:
         """
         La methode retourne les cibles encodées
         - si pre-traité et normalisé
         - sinon une liste vide [DataFrame([])]
         """
         return self._processed_data['species'] if self.__is_normalized else pd.DataFrame([])
-    def get_target(self):
+    def get_target(self) -> pd.DataFrame:
         """
         La methode retourne les cibles
         """
         return self.__data['species']
     def get_unique_label(self, encoded=False):
         return self.get_target().unique() if not encoded else self.get_encode_target().unique()
-    def x_train(self):
+    @property
+    def x_train(self) -> pd.DataFrame:
         """
         Retourne :
         - les features normalisées et pre-traitées
@@ -59,7 +67,8 @@ class LeafDataPreprocessing(object):
         - retourne : les features [normalisée]
         """
         return self._processed_data.drop(columns=['id', 'species'])
-    def y_train(self, encode=True):
+    @property
+    def y_train(self, encode=True) -> pd.DataFrame:
         """
         Si encode à True cela va encoder les cibles avec un unique identifiant si déjà pre-traitées
 
@@ -81,7 +90,7 @@ class LeafDataPreprocessing(object):
         - tuple(x_train, x_test, y_train, y_test)
         """
         if x_train is None or y_train is None:
-            x_train = self.x_train()
-            y_train = self.y_train()
+            x_train = self.x_train
+            y_train = self.y_train
         x_train, x_test, y_train, y_test = model_selection.train_test_split(x_train, y_train, test_size=ratio, random_state=42) # Test : 20%
         return x_train, x_test, y_train, y_test
