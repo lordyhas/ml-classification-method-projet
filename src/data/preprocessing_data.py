@@ -12,9 +12,9 @@ class DownloadData(object):
         return
 
 class LeafDataPreprocessing(object):
-    def __init__(self, train: pd.DataFrame, test: pd.DataFrame, normalized=True):
+    def __init__(self, data: pd.DataFrame, test: pd.DataFrame, normalized=True):
         self.__is_normalized = False
-        self._train = train
+        self._train = data
         #self._test = test
         self._processed_data = self._train.copy()
         self._processed_test_data = self._train.copy()
