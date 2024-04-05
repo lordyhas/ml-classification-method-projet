@@ -12,12 +12,12 @@ class DownloadData(object):
         return
 
 class LeafDataPreprocessing(object):
-    def __init__(self, data: pd.DataFrame, test: pd.DataFrame, normalized=True):
+    def __init__(self, data: pd.DataFrame, normalized=True):
         self.__is_normalized = False
-        self._train = data
+        self.__data = data
         #self._test = test
-        self._processed_data = self._train.copy()
-        self._processed_test_data = self._train.copy()
+        self._processed_data = self.__data.copy()
+        self._processed_test_data = self.__data.copy()
         self.__set_normalized_and_encode(normalized=normalized)
 
     def is_normalized(self):
@@ -37,20 +37,23 @@ class LeafDataPreprocessing(object):
         numeric_cols = self._processed_data.columns.drop(['id', 'species'])
         self._processed_data[numeric_cols] = scaler.fit_transform(self._processed_data[numeric_cols])
 
-    def get_encode_label(self):
+    def get_encode_target(self):
         """
         La methode retourne les cibles encodées
         - si pre-traité et normalisé
         - sinon une liste vide [DataFrame([])]
         """
         return self._processed_data['species'] if self.__is_normalized else pd.DataFrame([])
-    def get_label(self):
-        return self._train['species']
+    def get_target(self):
+        """
+        La methode retourne les cibles
+        """
+        return self.__data['species']
     def get_unique_label(self, encoded=False):
-        return self.get_label().unique() if not encoded else self.get_encode_label().unique()
+        return self.get_target().unique() if not encoded else self.get_encode_target().unique()
     def x_train(self):
         """
-        La methode retourne :
+        Retourne :
         - les features normalisées et pre-traitées
         - les cibles non pre-traitées
         - retourne : les features [normalisée]
@@ -59,25 +62,26 @@ class LeafDataPreprocessing(object):
     def y_train(self, encode=True):
         """
         Si encode à True cela va encoder les cibles avec un unique identifiant si déjà pre-traitées
-        La methode retourne :
+
+        Retourne :
         - les cibles (ou labels, classes) normalisées et pre-traitées
         - les cibles non pre-traitées
         """
         if encode:
-            return self.get_encode_label()
+            return self.get_encode_target()
         else:
-            return self.get_label()
+            return self.get_target()
     def split_train_and_test(self, x_train=None, y_train=None, ratio=0.2) -> tuple:
         """
         Cette methode divise le training set en train et test
-        - retourne : x_train, x_test, y_train, y_test
+        prend en paramètre une x_train, y_train si x_train=None ou y_train=None
+        ce sont les données passées en argument de l'objet [LeafDataPreprocessing] qui seront separées
+
+        Retourne :
+        - tuple(x_train, x_test, y_train, y_test)
         """
         if x_train is None or y_train is None:
             x_train = self.x_train()
             y_train = self.y_train()
         x_train, x_test, y_train, y_test = model_selection.train_test_split(x_train, y_train, test_size=ratio, random_state=42) # Test : 20%
         return x_train, x_test, y_train, y_test
-    def x_test(self):
-        pass
-    def y_test(self):
-        pass
