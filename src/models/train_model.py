@@ -1,24 +1,33 @@
+from sklearn.base import BaseEstimator
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
 
 class TrainModel(object):
-    def __init__(self, model):
+    def __init__(self, model, x_train, y_train, x_test=None, y_test=None):
         self.model = model
         self.is_trained = False
+        self.x_train = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
 
-    def training(self, x_train, y_train):
-        self.model.fit(x_train, y_train)
+    def training(self):
+        self.model.fit(self.x_train, self.y_train)
         self.is_trained = True
         return self.model
     def history(self):
         pass
     def predict(self, x):
          return self.model.predict(x)
-    def error(self, x, target):
-        pass
-    def train_error(self):
-        pass
-    def train_accuracy(self):
-        pass
+    def error_test(self, x, target):
+        error_rate = 1 - self.accuracy_test(x, target)
+        return error_rate
+    def accuracy_test(self, x, target):
+        y_pred = self.predict(x)
+        return accuracy_score(target, y_pred)
+
+    def accuracy_score(self):
+        return self.model.score()
     def get_trained_model(self):
         return self.model \
             if self.is_trained \
