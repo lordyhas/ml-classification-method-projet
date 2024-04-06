@@ -38,7 +38,7 @@ class NormalityDistributionCheck(object):
         """
         shapiro_results = stats.shapiro(self.data.flatten())
 
-        print(f"Valeur de la statistique de test : {shapiro_results[0]}")
+        print(f"Valeur de la statistique de test (Shapiro-Wilk) : {shapiro_results[0]}")
         print(f"Valeur-p (p-value) : {shapiro_results[1]}")
 
         # Interprétation de la valeur-p
@@ -55,7 +55,7 @@ class NormalityDistributionCheck(object):
         """
         ks_statistic, ks_p_value = stats.kstest(self.data.flatten(), self.dist)
 
-        print(f"Statistique de test KS : {ks_statistic}")
+        print(f"Statistique de test (Kolmogorov-Smirnov) : {ks_statistic}")
         print(f"Valeur-p (p-value) : {ks_p_value}")
 
         # Interprétation de la valeur-p
@@ -72,7 +72,7 @@ class NormalityDistributionCheck(object):
         """
         ad_test = stats.anderson(self.data.flatten(), dist=self.dist)
 
-        print(f"Statistique de test AD : {ad_test.statistic}")
+        print(f"Statistique de test (Anderson-Darling) : {ad_test.statistic}")
         for i in range(len(ad_test.critical_values)):
             sl, cv = ad_test.significance_level[i], ad_test.critical_values[i]
             if ad_test.statistic < cv:
