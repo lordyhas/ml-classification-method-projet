@@ -20,7 +20,7 @@ class NormalityDistributionCheck(object):
         Initialise l'objet avec les données fournies.
 
         Paramètres :
-            data (np.ndarray ou pd.DataFrame): Les données à tester.
+            data (np.ndarray ou pd.DataFrame) : Les données à tester.
             dist (str) : La distribution à utiliser pour le test, 'norm' par défaut pour la distribution normale.
         """
         if data is pd.DataFrame:

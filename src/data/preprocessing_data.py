@@ -1,14 +1,7 @@
 
-import numpy as np # linear algebra
 import pandas as pd
-from sklearn import model_selection
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-class DownloadData(object):
-    def __init__(self, path):
-        self.__path = path
-
-    def get_data_as_dataframe(self):
-        return
 
 class LeafDataPreprocessing(object):
     """
@@ -34,7 +27,7 @@ class LeafDataPreprocessing(object):
         """
         Initialise l'objet avec les données fournies et effectue le prétraitement et la normalisation si demandé.
 
-        Paramètres:
+        Paramètres :
             - data (pd.DataFrame): Les données à prétraiter.
             - normalized (bool): Si True, normalise les données et encode les cibles.
         """
@@ -119,7 +112,8 @@ class LeafDataPreprocessing(object):
         if x_train is None or y_train is None:
             x_train = self.x_train
             y_train = self.y_train
-        x_train, x_test, y_train, y_test = model_selection.train_test_split(x_train, y_train, test_size=ratio, random_state=42) # Test : 20%
+        x_train, x_test, y_train, y_test = train_test_split(
+            x_train, y_train, test_size=ratio, random_state=42)
         return x_train, x_test, y_train, y_test
 
     def get_processed_data(self):
