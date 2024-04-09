@@ -1,6 +1,7 @@
 from sklearn.base import BaseEstimator
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_score
+
 
 class TrainModel(object):
     def __init__(self, model, x_train, y_train, x_test=None, y_test=None):
@@ -33,6 +34,7 @@ class TrainModel(object):
             if self.is_trained \
             else None
 class CrossValidate(object):
+    __skf = StratifiedKFold(n_splits=8, shuffle=True, random_state=42)
     """
     Cette classe utilise GridSearchCV pour effectuer une validation croisée et une recherche d'hyperparamètres sur un modèle donné.
 
@@ -102,3 +104,6 @@ class CrossValidate(object):
             if self.is_trained \
             else None
 
+    @classmethod
+    def cross_validate_score(cls, model,  x_train, y_train, scoring='accuracy'):
+        return cross_val_score(model, x_train, y_train, cv=cls.__skf, scoring=scoring)
