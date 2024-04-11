@@ -57,10 +57,10 @@ class Measure(object):
         :return: Un tuple contenant la perte, l'exactitude, la précision, le rappel et le score F1 du modèle.
             - tuple(loss, accuracy, precision, recall, f1)
         """
-        loss = self.calculate_loss()
+        #loss = self.calculate_loss()
         accuracy = self.calculate_accuracy()
         precision = self.calculate_precision()
         recall = self.calculate_recall()
         f1 = self.calculate_f1()
         self.is_ready = True
-        return loss, accuracy, precision, recall, f1
+        return accuracy, precision, recall, f1
