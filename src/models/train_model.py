@@ -34,7 +34,7 @@ class TrainModel(object):
             if self.is_trained \
             else None
 class CrossValidate(object):
-    __skf = StratifiedKFold(n_splits=8, shuffle=True, random_state=42)
+
     """
     Cette classe utilise GridSearchCV pour effectuer une validation croisée et une recherche d'hyperparamètres sur un modèle donné.
 
@@ -76,9 +76,6 @@ class CrossValidate(object):
             - x_train: Caractéristiques d'entraînement.
             - y_train: Étiquettes d'entraînement.
         """
-        # Effectuer la recherche des hyperparamètres
-        # self.grid_search.fit(x_train, y_train)
-        # self.is_trained = True
         try:
             self.grid_search.fit(x_train, y_train)
             self.is_trained = True
@@ -94,16 +91,13 @@ class CrossValidate(object):
         else:
             print("La recherche des hyperparamètres n'a pas encore été effectuée.")
             return {}
-
-        #return self.grid_search.best_params_ \
-            #if self.is_trained \
-            #else {}
     @property
     def best_model(self):
         return self.grid_search.best_estimator_ \
             if self.is_trained \
             else None
 
-    @classmethod
-    def cross_validate_score(cls, model,  x_train, y_train, scoring='accuracy'):
-        return cross_val_score(model, x_train, y_train, cv=cls.__skf, scoring=scoring)
+    @staticmethod
+    def cv_score(model,  x_train, y_train, n_splits: int = 5, scoring='accuracy'):
+        skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
+        return cross_val_score(model, x_train, y_train, cv=skf, scoring=scoring)
