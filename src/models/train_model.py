@@ -96,7 +96,8 @@ class CrossValidate(object):
         return self.grid_search.best_estimator_ \
             if self.is_trained \
             else None
-
+    def best_score(self):
+        return self.grid_search.best_score_
     @staticmethod
     def cv_score(model,  x_train, y_train, n_splits: int = 5, scoring='accuracy'):
         skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
