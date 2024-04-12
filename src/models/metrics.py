@@ -23,44 +23,26 @@ class Measure(object):
         self.y_test = y_test
         self.pred = self.model.predict(self.x_test)
 
-    def calculate_loss(self, loss='neg_log_loss'):
-        """
-        Calcule la perte du modèle.
+    def show_metrics_test(self):
+        print("\nTest Score :", )
+        y_pred = self.model.predict(self.x_test)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        precision = precision_score(self.y_test, y_pred, average='macro')
+        recall = recall_score(self.y_test, y_pred, average='macro')
+        f1 = f1_score(self.y_test, y_pred, average='macro')
+        print(f"Accuracy : {accuracy}")
+        print(f"Precision : {precision}")
+        print(f"Recall : {recall}")
+        print(f"F1-score : {f1}")
 
-        :param loss: La métrique de perte à utiliser.
-        :return: La perte moyenne du modèle.
-        """
-        return -CrossValidate.cv_score(self.model, self.x_test, self.y_test, scoring=loss).mean()
-
-    def calculate_accuracy(self):
-        return accuracy_score(self.y_test, self.pred)
-
-    def calculate_precision(self):
-
-        return precision_score(self.y_test, self.pred, average='macro')
-
-    def calculate_recall(self):
-        return recall_score(self.y_test, self.pred, average='macro')
-
-    def calculate_f1(self):
-        """
-        Calcule le score F1 du modèle.
-
-        :return: Le score F1 du modèle.
-        """
-        return f1_score(self.y_test, self.pred, average='macro')
-
-    def get_metrics(self):
-        """
-        Obtient toutes les métriques du modèle.
-
-        :return: Un tuple contenant la perte, l'exactitude, la précision, le rappel et le score F1 du modèle.
-            - tuple(loss, accuracy, precision, recall, f1)
-        """
-        #loss = self.calculate_loss()
-        accuracy = self.calculate_accuracy()
-        precision = self.calculate_precision()
-        recall = self.calculate_recall()
-        f1 = self.calculate_f1()
-        self.is_ready = True
-        return accuracy, precision, recall, f1
+    def show_metrics_train(self):
+        print("\nTrain Score:")
+        y_pred = self.model.predict(self.x_train)
+        accuracy = accuracy_score(self.y_train, y_pred)
+        precision = precision_score(self.y_train, y_pred, average='macro')
+        recall = recall_score(self.y_train, y_pred, average='macro')
+        f1 = f1_score(self.y_train, y_pred, average='macro')
+        print(f"Accuracy : {accuracy}")
+        print(f"Precision : {precision}")
+        print(f"Recall : {recall}")
+        print(f"F1-score : {f1}")

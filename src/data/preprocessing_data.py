@@ -5,8 +5,6 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 class LeafDataPreprocessing(object):
     """
-        Cette classe est conçue pour prétraiter les données de feuilles
-
         Attributs:
             - __is_normalized (bool): Indique si les données ont été normalisées.
             - __data (pd.DataFrame): Les données brutes passées à l'objet lors de l'initialisation.
@@ -113,7 +111,7 @@ class LeafDataPreprocessing(object):
             x_train = self.x_train
             y_train = self.y_train
         x_train, x_test, y_train, y_test = train_test_split(
-            x_train, y_train, test_size=ratio, random_state=42)
+            x_train, y_train, test_size=ratio, random_state=42, stratify=y_train)
         return x_train, x_test, y_train, y_test
 
     def get_processed_data(self):
