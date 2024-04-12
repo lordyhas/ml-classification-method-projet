@@ -84,8 +84,6 @@ class CrossValidate(object):
 
     @property
     def best_params(self):
-        # les meilleurs hyperparamètres trouvés
-
         if self.is_trained:
             return self.grid_search.best_params_
         else:
