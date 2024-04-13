@@ -81,6 +81,7 @@ class CrossValidate(object):
             self.is_trained = True
         except Exception as e:
             print(f"Une erreur est survenue lors de l'entraînement : {e}")
+            raise e
 
     @property
     def best_params(self):
