@@ -94,6 +94,8 @@ class CrossValidate(object):
         return self.grid_search.best_estimator_ \
             if self.is_trained \
             else None
+
+    @property
     def best_score(self):
         return self.grid_search.best_score_
     @staticmethod
