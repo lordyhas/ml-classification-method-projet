@@ -80,7 +80,3 @@ class NormalityDistributionCheck(object):
             else:
                 print(
                     f"A un niveau de signification de {sl}%, les données ne semblent pas normales (statistique >= {cv}).")
-    @classmethod
-    def qq_plot(cls, x_train):
-        sm.qqplot(x_train, line='45')
-        plt.show()
