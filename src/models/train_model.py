@@ -1,6 +1,5 @@
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_score
 
-
 class CrossValidate(object):
 
     """
@@ -50,7 +49,6 @@ class CrossValidate(object):
         except Exception as e:
             print(f"Une erreur est survenue lors de l'entraînement : {e}")
             raise e
-
     @property
     def best_params(self):
         if self.is_trained:
