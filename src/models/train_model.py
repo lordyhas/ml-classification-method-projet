@@ -1,5 +1,3 @@
-from sklearn.base import BaseEstimator
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_score
 
 
