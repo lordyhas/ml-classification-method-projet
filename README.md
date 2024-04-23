@@ -1,12 +1,12 @@
-# ml-classification-experimentation - final-ift712-project
+# ml-leaf-classification-experimentation - ift712-project
 ==============================
 # Description
 
 # Team 
-- Hasan Kajila (tshh1301@usherbrooke.ca)
-- Imad Eddine Behlouli (behi3301@usherbrooke.ca)
-- Mallory Vadim Couthon (coum2050@usherbrooke.ca)
-- Ismail Andaloussi (andi1901@usherbrooke.ca)
+- Hasan Kajila (hassan.tsheleka.kajila@usherbrooke.ca)
+- Imad Eddine Behlouli (imad.eddine.behlouli@usherbrooke.ca)
+- Mallory Vadim Couthon (mallory.vadim.couthon@usherbrooke.ca)
+- Ismail Andaloussi (ismail.andaloussi2@usherbrooke.ca)
 ...
 
 Project Organization
